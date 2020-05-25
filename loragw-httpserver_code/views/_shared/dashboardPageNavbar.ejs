@@ -1,0 +1,17 @@
+<div class="lora-gateway-dashboard-content-navbar">
+    <span>Dashboard</span>
+    <ul class="nav nav-pills nav-stacked" role="tablist">
+        <li <% if (url.includes('/overview') ) { %> class="active" <% } %> >
+                <a href="/overview">Overview</a>
+        </li>
+        <li <% if (url.includes('/admin') ) { %> class="active" <% } %> >
+            <a href="/admin/password">Admin</a>
+        </li>
+        <li <% if (url.includes('/lora') ) { %> class="active" <% } %> >
+            <a href="/lora/overview">LoRa</a>
+        </li>
+        <li <% if (url.includes('/systemlog') ) { %> class="active" <% } %> >
+            <a href="/systemlog">System Log</a>
+        </li>
+    </ul>
+</div>

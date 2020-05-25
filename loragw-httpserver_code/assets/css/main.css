@@ -1,0 +1,63 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #24272E;
+    color: #ffffff;
+}
+
+/* 1. Container */
+.lora-gateway-dashboard-container {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right:0px;
+}
+
+/* 2. Header */
+.lora-gateway-dashboard-header {
+    position: absolute;
+    top: 0px;
+    height: 50px;
+    left: 0px;
+    right: 0px;
+    padding: 0px 15px;
+    border-bottom: 2px solid #ffffff;
+    font-size: 30px;
+}
+
+.lora-gateway-dashboard-header a {
+    margin-top: 7px;
+}
+
+/* 3. Footer */
+.lora-gateway-dashboard-footer {
+    position: absolute;
+    bottom: 0px;
+    height: 50px;
+    left: 0px;
+    right: 0px;
+    padding: 8px 15px;
+    border-top: 2px solid #ffffff;
+    font-size: 20px;
+}
+
+/* 4. Content Container */
+.lora-gateway-dashboard-content-container-wrapper {
+    position: absolute;
+    top: 50px;
+    bottom: 50px;
+    left: 0px;
+    right: 0px;
+    overflow: auto;
+}
+
+.lora-gateway-dashboard-content-container .row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+/* 5. Some Shared Element CSS Style */
+.form-group > input:disabled {
+    color: #ffffff;
+    background-color: #808080;
+}

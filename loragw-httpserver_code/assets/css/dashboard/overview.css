@@ -1,0 +1,5 @@
+.lora-gateway-dashboard-overview-content {
+    position: absolute;
+    left: 10px;
+    width: calc(100% - 20px);
+}

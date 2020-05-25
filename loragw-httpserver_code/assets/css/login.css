@@ -1,0 +1,20 @@
+/*
+ * General styles
+*/
+
+.lora-gateway-dashboard-content-well {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    width: calc(100% - 20px);
+    background-color: #2f323b
+}
+
+.lora-gateway-dashboard-content-well .form-group {
+    margin: 30px;
+}
+
+#dangerText {
+    color: #F00
+}

@@ -1,0 +1,67 @@
+<html>
+
+<% include ../_shared/htmlHeader.ejs %>
+
+    <body>
+        <% include ../_shared/dashboardPageHeader.ejs %>
+            <div class="lora-gateway-dashboard-content-container-wrapper">
+                <% include ../_shared/dashboardPageNavbar.ejs %>
+                    <div class="lora-gateway-dashboard-content-container">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    <label for="gatewaySN">Gateway Serial Number</label>
+                                    <input type="text" id="gatewaySN" class="form-control" value="<%= gatewayData.GatewaySN %>" disabled>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    <label for="gatewayMAC">Gateway MAC Address</label>
+                                    <input type="text" id="gatewayMAC" class="form-control" value="<%= gatewayData.GatewayMAC %>" disabled>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    <label for="gatewayType">Gateway Type</label>
+                                    <input type="text" id="gatewayType" class="form-control" value="<%= gatewayData.GatewayType %>" disabled>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    <label for="version">Version</label>
+                                    <input type="text" id="version" class="form-control" value="<%= gatewayData.Version %>" disabled>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    <label for="gatewayLat">Gateway Latitude</label>
+                                    <input type="text" id="gatewayLat" class="form-control" value="<%= gatewayData.GatewayLat %>" disabled>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    <label for="gatewayLng">Gateway Longitude</label>
+                                    <input type="text" id="gatewayLng" class="form-control" value="<%= gatewayData.GatewayLng %>" disabled>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    <label for="gatewayAlt">Gateway Altitude</label>
+                                    <input type="text" id="gatewayAlt" class="form-control" value="<%= gatewayData.GatewayAlt %>" disabled>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    <label for="networkInterface">Network Interface</label>
+                                    <input type="text" id="networkInterface" class="form-control" value="<%= gatewayData.NetworkInterface %>" disabled>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    <label for="wifiMode">WiFi Mode</label>
+                                    <input type="text" id="wifiMode" class="form-control" value="<%= gatewayData.WifiMode %>" disabled>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    <label for="uptime">Uptime (Minutes)</label>
+                                    <input type="text" id="uptime" class="form-control" value="<%= gatewayData.uptimeInMins %>" disabled>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    <label for="connectionMode">Connection Mode</label>
+                                    <input type="text" id="connectionMode" class="form-control" value="<%= gatewayData.ConnectionMode %>" disabled>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                    <label for="debugMode">Debug Mode</label>
+                                    <input type="text" id="debugMode" class="form-control" value="<%= gatewayData.DebugMode %>" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <% include ../_shared/footer.ejs %>
+    </body>
+
+</html>

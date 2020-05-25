@@ -1,0 +1,49 @@
+/* CSS for admin page */
+
+div.lora-gateway-dashboard-content-container > div.tab-content {
+    margin: 50px 50px;
+}
+
+div.lora-gateway-dashboard-content-container div.form-group {
+    margin-bottom: 30px;
+}
+
+.lora-gateway-dashboard-content-admin-form {
+    margin: 150px 50px;
+}
+
+.generic-page-tab-bar {
+    margin-bottom: 50px;
+}
+
+#editPassword label {
+    font-size: 16px;
+}
+
+#editNetworkMode .radio {
+    margin-bottom: 20px;
+}
+
+#editNetworkMode .btn {
+    margin-top: 30px;
+}
+
+#editNetworkMode label {
+    font-size: 16px;
+}
+
+#editWifiMode label {
+    font-size: 16px;
+}
+
+#editDebugMode .radio {
+    margin-bottom: 20px;
+}
+
+#editDebugMode .btn {
+    margin-top: 30px;
+}
+
+#editDebugMode label {
+    font-size: 16px;
+}

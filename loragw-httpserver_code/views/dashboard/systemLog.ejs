@@ -1,0 +1,37 @@
+<html>
+
+<% include ../_shared/htmlHeader.ejs %>
+
+    <body>
+        <% include ../_shared/dashboardPageHeader.ejs %>
+            <div class="lora-gateway-dashboard-content-container-wrapper">
+                <% include ../_shared/dashboardPageNavbar.ejs %>
+                    <div class="lora-gateway-dashboard-content-container">
+                        <div class="row">
+                            <div class="lora-gateway-dashboard-system-log-table col-sm-12 col-md-12 col-lg-12 table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Event</th>
+                                            <th scope="col">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% logData.forEach((logEntry) => { %>
+                                        <tr>
+                                            <td><%= logEntry.id %></td>
+                                            <td><%= logEntry.event %></td>
+                                            <td><%= logEntry.date %></td>
+                                        </tr>
+                                        <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <% include ../_shared/footer.ejs %>
+    </body>
+
+</html>

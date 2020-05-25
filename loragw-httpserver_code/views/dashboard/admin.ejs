@@ -1,0 +1,272 @@
+<html>
+
+    <% include ../_shared/htmlHeader.ejs %>
+
+    <body>
+        <% include ../_shared/dashboardPageHeader.ejs %>
+        <div class="lora-gateway-dashboard-content-container-wrapper">
+            <% include ../_shared/dashboardPageNavbar.ejs %>
+            <div class="lora-gateway-dashboard-content-container">
+
+                <ul class="nav nav-tabs">
+                    <li <% if (url.includes( '/admin/password') ) { %> class="active"
+                        <% } %>>
+                        <a href="/admin/password">Password</a>
+                    </li>
+                    <li <% if (url.includes( '/admin/networkmode') ) { %> class="active"
+                        <% } %>>
+                        <a href="/admin/networkmode">Network Interface</a>
+                    </li>
+                    <li <% if (url.includes( '/admin/wifimode') ) { %> class="active"
+                        <% } %>>
+                        <a href="/admin/wifimode">WiFi Mode</a>
+                    </li>
+                    <li <% if (url.includes( '/admin/debug') ) { %> class="active"
+                        <% } %>>
+                        <a href="/admin/debug">Debug Mode</a>
+                    </li>
+                </ul>
+
+                <!-- Edit Password -->
+                <% if (url.includes("/admin/password")) { %>
+                <form id="editPassword" class="lora-gateway-dashboard-content-admin-form">
+                    <% if (url.includes("?success")) { %>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3 alert alert-success update-success" role="alert">
+                            Password updated successfully
+                            <button type="button" class="close" aria-label="Close" onclick="hidePasswordUpdateSuccessAlert()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <% } %>
+                    <% if (url.includes("?failure")) { %>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3 alert alert-danger update-failure" role="alert">
+                            Error: Problem updating password
+                            <button type="button" class="close" aria-label="Close" onclick="hidePasswordUpdateFailureAlert()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <% } %>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3 alert alert-danger password-alert" role="alert">
+                            Error: Passwords must match and be a non-empty string
+                            <button type="button" class="close" aria-label="Close" onclick="hideEditPasswordAlert()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3">
+                            <label for="password">Password</label>
+                            <input id="admin-password" type="text" name="password" id="password" class="form-control" onfocus="hidePasswordUpdateSuccessAlert()">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input id="admin-confirm-password" type="text" name="confirmPassword" id="confirmPassword" class="form-control" onfocus="hidePasswordUpdateSuccessAlert()">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3">
+                            <a class="btn btn-primary pull-right" onclick="editPassword()">Submit</a>
+                        </div>
+                    </div>
+                </form>
+                <% } %>
+
+                <!-- Network Interface -->
+                <% if (url.includes("/admin/networkmode")) { %>
+                <form id="editNetworkMode" class="lora-gateway-dashboard-content-admin-form">
+
+                    <!-- Alerts -->
+                    <% if (url.includes("?success")) { %>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3 alert alert-success update-success" role="alert">
+                            Network mode updated successfully
+                            <button type="button" class="close" aria-label="Close" onclick="hideNetworkUpdateSuccessAlert()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <% } %>
+                    <% if (url.includes("?failure")) { %>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3 alert alert-danger update-failure" role="alert">
+                            Error: Problem updating network mode
+                            <button type="button" class="close" aria-label="Close" onclick="hideNetworkUpdateFailureAlert()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <% } %>
+
+                    <% if (networkMode.isApMode) { %>
+                    <input type="text" id="isApMode" name="isApMode" class="form-control" value="true" style="display: none;">
+                    <% } %>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-4 col-lg-offset-4">
+                            <label class="radio">
+                                <input type="radio" id="wifiMode" name="wifiMode" onclick="switchToWifiMode()" <% if (networkMode.name === "WiFi") { %> checked <% } %> >WiFi
+                            </label>
+                            
+                            <label class="radio">
+                                <input type="radio" id="lteMode" name="lteMode" onclick="switchToLTEMode()" <% if (networkMode.name === "LTE") { %> checked <% } %>>LTE
+                            </label>
+                            
+                            <label class="radio">
+                                <input type="radio" id="ethernetMode" name="ethernetMode" onclick="switchToEthernetMode()" <% if (networkMode.name === "Ethernet") { %> checked <% } %>>Ethernet
+                            </label>
+                        </div>
+                        <br>
+                        <div class="col-sm-12 col-md-12 col-lg-4 col-lg-offset-4">
+                            <a class="btn btn-primary" onclick="editNetworkMode()">Submit</a>
+                        </div>
+                    </div>
+                </form>
+                <% } %>
+
+                <!-- WiFi Mode -->
+                <% if (url.includes("/admin/wifimode")) { %>
+                <form id="editWifiMode" class="lora-gateway-dashboard-content-admin-form">
+
+                    <!-- Alerts -->
+                    <% if (url.includes("?success")) { %>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3 alert alert-success update-success" role="alert">
+                            WiFi account details updated successfully
+                            <button type="button" class="close" aria-label="Close" onclick="hidePasswordUpdateSuccessAlert()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <% } %>
+                    <% if (url.includes("?failure")) { %>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3 alert alert-danger update-failure" role="alert">
+                            Error: Problem updating WiFi account details
+                            <button type="button" class="close" aria-label="Close" onclick="hidePasswordUpdateFailureAlert()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <% } %>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3 alert alert-danger wifi-mode-alert" role="alert">
+                            Error: SSID and password must be a non-empty string
+                            <button type="button" class="close" aria-label="Close" onclick="hideEditWifiModeAlert()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-6 col-lg-offset-3">
+                            <% if (networkInterface !== "WiFi") { %>
+                            <label class="radio-inline">
+                                <input type="radio" id="apMode" name="apMode" onclick="switchToAPMode()" <% if (wifiMode.name === "AP") { %> checked <% } %> >AP Mode
+                            </label>
+                            <% } %>
+                            
+                            <label class="radio-inline">
+                                <input type="radio" id="stationMode" name="stationMode" onclick="switchToStationMode()" <% if (wifiMode.name === "Station") { %> checked <% } %>>Station Mode
+                            </label>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Main Content -->
+                    <div class="apModeContent">
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3">
+                                <label for="ssid">SSID</label>
+                                <input type="text" id="wifiModeSsid" name="ap-mode-ssid" class="form-control" value="<%= wifiMode.content.apMode.ssid %>" onfocus="hidePasswordUpdateSuccessAlert()">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3">
+                                <label for="password">Password</label>
+                                <input type="text" id="wifiModePassword" name="ap-mode-password" class="form-control" value="<%= wifiMode.content.apMode.password %>" onfocus="hidePasswordUpdateSuccessAlert()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stationModeContent">
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3">
+                                <label for="ssid">SSID</label>
+                                <input type="text" id="wifiModeSsid" name="stn-mode-ssid" class="form-control" value="<%= wifiMode.content.stnMode.ssid %>" onfocus="hidePasswordUpdateSuccessAlert()">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3">
+                                <label for="password">Password</label>
+                                <input type="text" id="wifiModePassword" name="stn-mode-password" class="form-control" value="<%= wifiMode.content.stnMode.password %>" onfocus="hidePasswordUpdateSuccessAlert()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3">
+                            <a class="btn btn-primary pull-right" onclick="editWifiMode()">Submit</a>
+                        </div>
+                    </div>
+                </form>
+                <% } %>
+
+                <!-- Debug Mode -->
+                <% if (url.includes("/admin/debug")) { %>
+                <form id="editDebugMode" class="lora-gateway-dashboard-content-admin-form">
+
+                    <!-- Alerts -->
+                    <% if (url.includes("?success")) { %>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3 alert alert-success update-success" role="alert">
+                            Debug mode updated successfully
+                            <button type="button" class="close" aria-label="Close" onclick="hideDebugModeUpdateSuccessAlert()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <% } %>
+                    <% if (url.includes("?failure")) { %>
+                    <div class="row">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-6 col-lg-offset-3 alert alert-danger update-failure" role="alert">
+                            Error: Problem updating debug mode
+                            <button type="button" class="close" aria-label="Close" onclick="hideDebugModeUpdateFailureAlert()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <% } %>
+
+                    <!-- Main Content -->
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-4 col-lg-offset-4">
+                            <label class="radio">
+                                <input type="radio" id="debugMode0" name="debugMode0" onclick="switchToDebugMode0()" <% if (gatewayData.DebugMode === 0) { %> checked <% } %> >Debug Mode Off
+                            </label>
+                            
+                            <label class="radio">
+                                <input type="radio" id="debugMode1" name="debugMode1" onclick="switchToDebugMode1()" <% if (gatewayData.DebugMode === 1) { %> checked <% } %>>Debug Level 1
+                            </label>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="col-sm-12 col-md-12 col-lg-4 col-lg-offset-4">
+                            <a class="btn btn-primary" onclick="editDebugMode()">Submit</a>
+                        </div>
+                    </div>
+                </form>
+                <% } %>
+
+            </div>
+        </div>
+</div>
+<% include ../_shared/footer.ejs %>
+</body>
+
+</html>

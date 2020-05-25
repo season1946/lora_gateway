@@ -1,0 +1,11 @@
+.lora-gateway-dashboard-system-log-table thead tr th {
+    text-align: center;
+}
+
+.lora-gateway-dashboard-system-log-table tbody tr:hover {
+    color: #000000;
+}
+
+.lora-gateway-dashboard-system-log-table tbody tr td {
+    text-align: center;
+}

@@ -1,0 +1,211 @@
+<html>
+    
+    <% include ../_shared/htmlHeader.ejs %>
+    
+    <body>
+        <% include ../_shared/dashboardPageHeader.ejs %>
+        <div class="lora-gateway-dashboard-content-container-wrapper">
+            <% include ../_shared/dashboardPageNavbar.ejs %>
+            <div class="lora-gateway-dashboard-content-container">
+
+                <ul class="nav nav-tabs generic-page-tab-bar">
+                    <li <% if (url.includes( '/lora/overview') ) { %> class="active" <% } %>>
+                        <a href="/lora/overview">Overview</a>
+                    </li>
+                    <li <% if (url.includes( '/lora/registry') ) { %> class="active" <% } %>>
+                        <a href="/lora/registry">Registry Info</a>
+                    </li>
+                    <li <% if (url.includes( '/lora/running') ) { %> class="active" <% } %>>
+                        <a href="/lora/running">Running Info</a>
+                    </li>
+                </ul>
+
+                <!-- Overview -->
+                <% if (url.includes("/lora/overview")) { %>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label for="freqBand">Frequency Band</label>
+                            <input type="text" id="freqBand" class="form-control" value="<%= overviewData.freqBand %>" disabled>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label for="uplinkChannel">Uplink Channel</label>
+                            <input type="text" id="uplinkChannel" class="form-control" value="<%= overviewData.uplinkChannel %>" disabled>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label for="gwServerIpPort">Gateway Server IP & Port</label>
+                            <input type="text" id="gwServerIpPort" class="form-control" value="<%= overviewData.gwServerIpPort %>" disabled>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label for="ctrlServerIpPort">Control Server IP & Port</label>
+                            <input type="text" id="ctrlServerIpPort" class="form-control" value="<%= overviewData.ctrlServerIpPort %>" disabled>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label for="antennaGain">AntennaGain</label>
+                            <input type="text" id="antennaGain" class="form-control" value="<%= overviewData.antennaGain %>" disabled>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label for="fskEnable">FSK Enable</label>
+                            <input type="text" id="fskEnable" class="form-control" value="<%= overviewData.fskEnable %>" disabled>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label for="beaconEnable">Beacon Enable</label>
+                            <input type="text" id="beaconEnable" class="form-control" value="<%= overviewData.beaconEnable %>" disabled>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label for="pktRecdNum">Packets Received</label>
+                            <input type="text" id="pktRecdNum" class="form-control" value="<%= overviewData.pktRecdNum %>" disabled>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label for="pktSentNum">Packets Sent</label>
+                            <input type="text" id="pktSentNum" class="form-control" value="<%= overviewData.pktSentNum %>" disabled>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label for="beaconSentNum">Beacons Sent</label>
+                            <input type="text" id="beaconSentNum" class="form-control" value="<%= overviewData.beaconSentNum %>" disabled>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <label for="clkDriftBias">SX1301 Clock Drift & Bias</label>
+                            <input type="text" id="clkDriftBias" class="form-control" value="<%= overviewData.clkDriftBias %>" disabled>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+
+                <!-- Registry Info -->
+                <% if (url.includes("/lora/registry")) { %>
+                <div class="row">
+                    <div class="lora-gateway-dashboard-system-log-table col-sm-12 col-md-12 col-lg-12 table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">UTC Time</th>
+                                    <th scope="col">Gateway Time</th>
+                                    <th scope="col">DevEUI</th>
+                                    <th scope="col">RSSI</th>
+                                    <th scope="col">SNR</th>
+                                    <th scope="col">SF</th>
+                                    <th scope="col">Bandwidth</th>
+                                    <th scope="col">Code Rate</th>
+                                    <th scope="col">CRC</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% devices.forEach((device) => { %>
+                                <tr>
+                                    <td><%= device.utcTime %></td>
+                                    <td><%= device.gatewayTime %></td>
+                                    <td><%= device.devEUI %></td>
+                                    <td><%= device.rssi %></td>
+                                    <td><%= device.snr %></td>
+                                    <td><%= device.sf %></td>
+                                    <td><%= device.bandwidth %></td>
+                                    <td><%= device.codeRate %></td>
+                                    <td><%= device.crc %></td>
+                                </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <% } %>
+
+                <!-- Running Info -->
+                <% if (url === "/lora/running") { %>
+                <div class="row">
+                    <div class="lora-gateway-dashboard-system-log-table col-sm-12 col-md-12 col-lg-12 table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">DevAddr</th>
+                                    <th scope="col">FCnt</th>
+                                    <th scope="col">UTC Time</th>
+                                    <th scope="col">Gateway Time</th>
+                                    <th scope="col">Freq</th>
+                                    <th scope="col">SF</th>
+                                    <th scope="col">Bandwidth</th>
+                                    <th scope="col">Code Rate</th>
+                                    <th scope="col">Payload Size</th>
+                                    <th scope="col">Payload</th>
+                                    <th scope="col">RSSI</th>
+                                    <th scope="col">SNR</th>
+                                    <th scope="col">CRC</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% devices.forEach((device) => { %>
+                                <tr>
+                                    <td><a href="/lora/running/devaddr/<%= device.devAddr %>"><%= device.devAddr %></a></td>
+                                    <td><% if (device.fCnt !== null) { %><%= device.fCnt %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (device.utcTime !== null) { %><%= device.utcTime %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (device.gatewayTime !== null) { %><%= device.gatewayTime %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (device.frequency !== null) { %><%= device.frequency %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (device.sf !== null) { %><%= device.sf %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (device.bandwidth !== null) { %><%= device.bandwidth %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (device.codeRate !== null) { %><%= device.codeRate %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (device.payloadSize !== null) { %><%= device.payloadSize %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (device.payload !== null) { %><%= device.payload %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (device.rssi !== null) { %><%= device.rssi %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (device.snr !== null) { %><%= device.snr %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (device.crc !== null) { %><%= device.crc %><% } else { %><code>null</code><% } %></td>
+                                </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <% } %>
+
+                <!-- Running Info -->
+                <% if (url.includes("/lora/running/devaddr")) { %>
+                <div class="row">
+                    <div class="lora-gateway-dashboard-system-log-table col-sm-12 col-md-12 col-lg-12 table-responsive">
+                        <a href="/lora/running"><-- Back to all devices</a>
+                        <br>
+                        <br>
+                        <h3 style="margin-top: 0em;">DevAddr: <strong><%= devAddr %></strong></h3>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">FCnt</th>
+                                    <th scope="col">UTC Time</th>
+                                    <th scope="col">Gateway Time</th>
+                                    <th scope="col">Freq</th>
+                                    <th scope="col">SF</th>
+                                    <th scope="col">Bandwidth</th>
+                                    <th scope="col">Code Rate</th>
+                                    <th scope="col">Payload Size</th>
+                                    <th scope="col">Payload</th>
+                                    <th scope="col">RSSI</th>
+                                    <th scope="col">SNR</th>
+                                    <th scope="col">CRC</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (let i = 0; i < devices.length; i++ ) { %>
+                                <tr>
+                                    <td><% if (devices[i].fCnt !== null) { %><%= devices[i].fCnt %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (devices[i].utcTime !== null) { %><%= devices[i].utcTime %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (devices[i].gatewayTime !== null) { %><%= devices[i].gatewayTime %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (devices[i].frequency !== null) { %><%= devices[i].frequency %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (devices[i].sf !== null) { %><%= devices[i].sf %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (devices[i].bandwidth !== null) { %><%= devices[i].bandwidth %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (devices[i].codeRate !== null) { %><%= devices[i].codeRate %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (devices[i].payloadSize !== null) { %><%= devices[i].payloadSize %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (devices[i].payload !== null) { %><%= devices[i].payload %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (devices[i].rssi !== null) { %><%= devices[i].rssi %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (devices[i].snr !== null) { %><%= devices[i].snr %><% } else { %><code>null</code><% } %></td>
+                                    <td><% if (devices[i].crc !== null) { %><%= devices[i].crc %><% } else { %><code>null</code><% } %></td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+        <% include ../_shared/footer.ejs %>
+    </body>
+    
+</html>
