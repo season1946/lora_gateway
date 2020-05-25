@@ -12,7 +12,7 @@
 $(document).ready(function () {
     let isCellPhone = checkCellPhone();
     if (isCellPhone) {
-        $(".lora-gateway-dashboard-header > div > p").text("Appropolis Gateway");
+        $(".lora-gateway-dashboard-header > div > p").text("app Gateway");
         $(".lora-gateway-dashboard-header > div > p").css({ "font-size": "18px", "margin-top": "9px" });
         $(".lora-gateway-dashboard-footer").css("font-size", "16px");
     }

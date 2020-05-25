@@ -4,7 +4,7 @@ module.exports = {
     sequelize: {
         development: {
             username:   "root",
-            password:   "appropolis",
+            password:   "test",
             database:   "gateway_agent",
             host:       "10.10.10.10",
             dialect:    "mysql",

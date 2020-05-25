@@ -48,10 +48,6 @@ if (config.environment === "prodCalgary") {
     config.lgsHost = "10.10.10.8";
     config.lgsPort = 9700;
 }
-if (config.environment === "prodShanghai") {
-    config.lgsHost = "www.appropolis.com.cn";
-    config.lgsPort = 9700;
-}
 
 if (config.acceptedEnvironments.includes(config.environment) == false) {
     throw new Error("Error: Invalid environment name. Please check your config file.");
